@@ -45,7 +45,7 @@ export default class Login extends Component {
               AsyncStorage.setItem('token', result.token);
               this.props.navigation.navigate('dashboard')
 
-                 /* const value =  AsyncStorage.getItem('token').then((value) => {console.log(value)});  for future */           
+                 /* const value =  AsyncStorage.getItem('token').then((value) => {console.log(value)});  for future    */       
                  
             }
 

@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
+import {AsyncStorage} from 'react-native';
 
 
 export default class Dashboard extends Component {
@@ -12,7 +13,11 @@ export default class Dashboard extends Component {
   }
     render() {
       return (
+
+        
         <PaperProvider >
+
+          
           <Appbar.Header theme = {defaulttheme}>
             <Appbar.BackAction
               onPress={this._goBack}
@@ -28,7 +33,7 @@ export default class Dashboard extends Component {
           <Card theme = {defaulttheme}>
             <Card.Title title="Card Title" subtitle="Card Subtitle" left={(props) => <Avatar.Icon {...props} icon="folder" />} />
             <Card.Content>
-              <Title>Card title</Title>
+              <Title>Dashboard</Title>
               <Paragraph>Card content</Paragraph>
             </Card.Content>
             <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />

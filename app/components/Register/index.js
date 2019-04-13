@@ -1,7 +1,7 @@
 
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, View, TextInput,Alert, TouchableOpacity } from 'react-native';
 
 
 export default class Register extends Component {
@@ -12,18 +12,45 @@ export default class Register extends Component {
     }
 
     checkRegisteration() {
-        //const { name, address, email, password, phone } = this.state
-       /* fetch('http://food.application.pk/registercustomer', 
-        {method: 'POST' , 
-         body: `name=${name}&address=${address}&email=${email}&pass=${password}&phone=${phone}`
-        }).then(res => {
-            return res.text()
-        })
-        .then(res => {
-          Alert.alert('Success', res.text(), [{
-            text: 'Okay'
-          }])
-        }) */
+        const { name, address, email, password, phone } = this.state
+
+        let data = {
+          method: 'POST',
+          credentials: 'same-origin',
+          mode: 'same-origin',
+          body: JSON.stringify({
+            email: email,
+            pass: password,
+            name: name,
+            address: address,
+            phone: phone
+          }),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        }
+
+
+        fetch('http://food.application.pk/registercustomer',data).then(res => res.json()).then(
+          (result) => {
+
+            if(result.errors){
+              Alert.alert('Error', result.errors[0], [{text: 'Okay'}])
+
+            }
+            else{
+
+              Alert.alert('Success', result.success, [{text: 'Okay'}])
+              this.props.navigation.navigate('dashboard')
+
+            }
+
+
+          })
+
+
+      
     }
 
     render() {
