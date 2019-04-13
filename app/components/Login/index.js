@@ -2,13 +2,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 
+
+
 export default class Login extends Component {
 
     state = { email:"" , password:"" }
     static navigationOptions = {
         header: null
     }
-
+    
     checkLogin() {
         const { email, password } = this.state
         if (email == 'admin' && password == 'admin' ) {
@@ -22,8 +24,11 @@ export default class Login extends Component {
     }
 
     render() {
+      if (this.state.isLoading) {
+        return <SplashScreen />;
+      }
+    
       return (
-        
         <View style={styles.container}>
           <View style={styles.titleView}>
              <Text style={styles.titleText}>
@@ -57,6 +62,8 @@ export default class Login extends Component {
       );
     }
   }
+
+ 
 
   const styles = StyleSheet.create({
     container: {
