@@ -1,6 +1,8 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
+import {AsyncStorage} from 'react-native';
+
 
 
 
@@ -12,15 +14,44 @@ export default class Login extends Component {
     }
     
     checkLogin() {
+
         const { email, password } = this.state
-        if (email == 'admin' && password == 'admin' ) {
-            this.props.navigation.navigate('dashboard')
+
+
+        let data = {
+          method: 'POST',
+          credentials: 'same-origin',
+          mode: 'same-origin',
+          body: JSON.stringify({
+            email: email,
+            pass: password
+          }),
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
         }
-        else {
-            Alert.alert('Error', 'Email or Password is incorrect', [{
-                text: 'Okay'
-            }])
-        }
+
+        fetch('http://food.application.pk/logincustomer',data).then(res => res.json()).then(
+          (result) => {
+
+            if(result.error){
+          
+            Alert.alert('Error', result.error, [{text: 'Okay'}])
+            }
+
+            else{
+
+              AsyncStorage.setItem('token', result.token);
+              this.props.navigation.navigate('dashboard')
+
+                 /* const value =  AsyncStorage.getItem('token').then((value) => {console.log(value)});  for future */           
+                 
+            }
+
+
+          })
+
     }
 
     render() {
