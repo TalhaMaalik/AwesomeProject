@@ -6,7 +6,7 @@
  * @flow
  */
 
-import { createStackNavigator , createAppContainer , createDrawerNavigator } from 'react-navigation';
+import { createStackNavigator , createAppContainer , createDrawerNavigator ,createSwitchNavigator } from 'react-navigation';
 import React, {Component} from 'react';
 import Login from './app/components/Login';
 import Register from './app/components/Register';
@@ -25,7 +25,6 @@ class App extends Component {
 }
 
 const AppStack = createStackNavigator({
-    splash: SplashScreen,
     login: Login,  
     dashboard: Dashboard,
     register: Register
@@ -38,6 +37,16 @@ const AppStack = createStackNavigator({
   }, 
 });  
 
-export default appContainer =  createAppContainer(AppStack)
+Appstack2 = createSwitchNavigator(
+  {
+    Splash: SplashScreen,
+    App: AppStack,
+  },
+  {
+    initialRouteName: 'Splash',
+  }
+);
+
+export default appContainer =  createAppContainer(Appstack2)
 
 
