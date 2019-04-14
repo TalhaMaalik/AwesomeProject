@@ -16,8 +16,7 @@ export default class Login extends Component {
     checkLogin() {
 
         const { email, password } = this.state
-
-
+        
         let data = {
           method: 'POST',
           credentials: 'same-origin',

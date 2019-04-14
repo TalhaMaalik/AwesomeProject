@@ -14,44 +14,54 @@ export default class Register extends Component {
     checkRegisteration() {
         const { name, address, email, password, phone } = this.state
 
-        let data = {
-          method: 'POST',
-          credentials: 'same-origin',
-          mode: 'same-origin',
-          body: JSON.stringify({
-            email: email,
-            pass: password,
-            name: name,
-            address: address,
-            phone: phone
-          }),
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+        let reg1 = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        let reg2 = /^[0]?\d{11}$/;
+        if(reg1.test(email) === false)
+        {
+        Alert.alert('Error', 'Please enter correct email format', [{text: 'Okay'}])
+        return false;
         }
 
+        else if(reg2.test(phone) === false && phone.length != 11)
+        {
+        Alert.alert('Error', 'Please enter correct phone number', [{text: 'Okay'}])
+        return false;
+        }
 
-        fetch('http://food.application.pk/registercustomer',data).then(res => res.json()).then(
-          (result) => {
-
-            if(result.errors){
-              Alert.alert('Error', result.errors[0], [{text: 'Okay'}])
-
+        else {
+          let data = {
+            method: 'POST',
+            credentials: 'same-origin',
+            mode: 'same-origin',
+            body: JSON.stringify({
+              email: email,
+              pass: password,
+              name: name,
+              address: address,
+              phone: phone
+            }),
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
             }
-            else{
-
-              Alert.alert('Success', result.success, [{text: 'Okay'}])
-              this.props.navigation.navigate('dashboard')
-
-            }
-
-
-          })
-
-
-      
+          }
+  
+          fetch('http://food.application.pk/registercustomer',data).then(res => res.json()).then(
+            (result) => {
+  
+              if(result.errors){
+                Alert.alert('Error', result.errors[0], [{text: 'Okay'}])
+  
+              }
+              else{
+                Alert.alert('Success', result.success,)
+                this.props.navigation.navigate('login')
+  
+              }
+            })
+        }
     }
+
 
     render() {
       return (
@@ -75,7 +85,7 @@ export default class Register extends Component {
                   />
 
               <Text style={styles.text}>Enter Your Phone Number</Text>
-                  <TextInput style={styles.inputText} placeholder="Phone"
+                  <TextInput style={styles.inputText} keyboardType="numeric" placeholder="Phone"
                     onChangeText={text => this.setState({ phone: text})}
                   />
 
