@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
-import {AsyncStorage} from 'react-native';
+import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 
 
 export default class Dashboard extends Component {
@@ -13,34 +13,32 @@ export default class Dashboard extends Component {
   }
     render() {
       return (
-
-        
-        <PaperProvider >
-
-          
+        <PaperProvider>
           <Appbar.Header theme = {defaulttheme}>
-            <Appbar.BackAction
-              onPress={this._goBack}
-            />
             <Appbar.Content
-              title="Title"
-              subtitle="Subtitle"
+              
             />
             <Appbar.Action icon="search" onPress={this._onSearch} />
             <Appbar.Action icon="more-vert" onPress={this._onMore} />
           </Appbar.Header>
 
-          <Card theme = {defaulttheme}>
-            <Card.Title title="Card Title" subtitle="Card Subtitle" left={(props) => <Avatar.Icon {...props} icon="folder" />} />
+          <Card style = {styles.card} theme = {defaulttheme}>
+           
             <Card.Content>
-              <Title>Dashboard</Title>
-              <Paragraph>Card content</Paragraph>
+              <View style = {styles.cardtitleview}>
+                <Title style = {styles.cardtitle}>Restaurant Name</Title>
+              </View>
+
+              <View style = {styles.cardparagraphview}>
+                <Paragraph>Restaurant Address{"\n"}</Paragraph>
+              </View>
+
+              <View style = {styles.cardbottomview}>
+                <Text >delivery time</Text>
+                <Text>minimum delivery</Text>
+              </View>
+
             </Card.Content>
-            <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-            <Card.Actions>
-              <Button>Cancel</Button>
-              <Button>Ok</Button>
-            </Card.Actions>
          </Card>
         </PaperProvider>
       );
@@ -53,5 +51,33 @@ export default class Dashboard extends Component {
       primary: '#ff2e44',
     }
   };
+
+  const styles = StyleSheet.create({
+    card: {
+      padding: 20,
+      marginTop: 10,
+      marginRight: 10,
+      marginLeft: 10
+    },
+
+    cardtitleview: {
+      flex: 0
+    },
+
+    cardparagraphview: {
+      marginTop: 20
+    },
+
+    cardbottomview: {
+      marginTop: 10,
+      justifyContent: 'space-between',
+      flexDirection: 'row'
+    },
+
+    cardtitle: {
+      alignSelf: 'center',
+      fontSize: 25,
+      fontFamily: 'Montserrat-Light'
+    }
+  });
   
-  //MINHAJ KE LIYE COMMIT

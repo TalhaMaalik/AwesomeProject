@@ -13,20 +13,9 @@ import Register from './app/components/Register';
 import Dashboard from './app/components/Dashboard';
 import SplashScreen from './app/components/SplashScreen';
 
-export {
-  App
-}
-class App extends Component {
-  render() {
-    return (
-      <AppStack />
-    )
-  }
-}
 
 const AppStack = createStackNavigator({
     login: Login,  
-    dashboard: Dashboard,
     register: Register
 }, 
 {
@@ -37,13 +26,14 @@ const AppStack = createStackNavigator({
   }, 
 });  
 
-Appstack2 = createSwitchNavigator(
+const Appstack2 = createSwitchNavigator(
   {
     Splash: SplashScreen,
+    dashboard: Dashboard,
     App: AppStack,
   },
   {
-    initialRouteName: 'Splash',
+    initialRouteName: 'dashboard',
   }
 );
 

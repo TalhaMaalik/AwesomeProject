@@ -3,9 +3,6 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import {AsyncStorage} from 'react-native';
 
-
-
-
 export default class Login extends Component {
 
     state = { email:"" , password:"" }
@@ -16,7 +13,7 @@ export default class Login extends Component {
     checkLogin() {
 
         const { email, password } = this.state
-        
+
         let data = {
           method: 'POST',
           credentials: 'same-origin',
@@ -43,12 +40,9 @@ export default class Login extends Component {
 
               AsyncStorage.setItem('token', result.token);
               this.props.navigation.navigate('dashboard')
-
                  /* const value =  AsyncStorage.getItem('token').then((value) => {console.log(value)});  for future    */       
                  
             }
-
-
           })
 
     }
