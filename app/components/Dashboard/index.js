@@ -87,7 +87,12 @@ export default class Dashboard extends Component {
     fetch('http://food.application.pk/retrieve',data).then(res => res.json()).then(
       (result) => {
 
-        console.log(result['rest'][0])
+        this.setState({
+
+          rest: result['rest'],
+          cust: result['user']
+
+        })
 
       })
 
@@ -99,12 +104,7 @@ export default class Dashboard extends Component {
     renderPage(){
       
       if(global.lat && global.token){
-        
         this.loadrestaurants();
-        
-        this.setState({
-          rest:null
-        })
       }
     
 
@@ -117,6 +117,8 @@ export default class Dashboard extends Component {
         return null;
       }
       
+
+      console.log(this.state.rest)
      
     
 
