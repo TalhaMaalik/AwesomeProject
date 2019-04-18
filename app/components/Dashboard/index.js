@@ -1,13 +1,10 @@
 
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import {AsyncStorage} from 'react-native';
-
-
-
 
 
 export default class Dashboard extends Component {
@@ -21,14 +18,9 @@ export default class Dashboard extends Component {
   
   }
 
-
   static navigationOptions = {
     header: null
   }
-
-
-
-
 
   componentWillMount () {
     
@@ -39,20 +31,13 @@ export default class Dashboard extends Component {
 
   _sucesslocation= (position) =>{
 
-    
-
      global.lat= parseFloat(position.coords.latitude);
      global.lon= parseFloat(position.coords.longitude)
-
-  
-
-   this.renderPage();
-
+     this.renderPage();
 
   }
 
   _loadInitialState = async () => {
-
 
     try {
         var value = await AsyncStorage.getItem('token')
@@ -88,39 +73,27 @@ export default class Dashboard extends Component {
       (result) => {
 
         this.setState({
-
           rest: result['rest'],
           cust: result['user']
-
         })
-
       })
-
-
     }
   
-
-
     renderPage(){
       
       if(global.lat && global.token){
         this.loadrestaurants();
       }
-    
-
     }
   
   
     render() {
 
-      if(!global.lat || !global.token){
+      if(!global.lat || !global.token) {
         return null;
       }
       
-
       console.log(this.state.rest)
-     
-    
 
       return (
         <PaperProvider>
@@ -130,32 +103,35 @@ export default class Dashboard extends Component {
             <Appbar.Action icon="more-vert" onPress={this._onMore} />
           </Appbar.Header>
 
-          <Card style = {styles.card} theme = {defaulttheme}>
-           
-            <Card.Content>
-              <View style = {styles.cardtitleview}>
-              <Title style = {styles.cardtitle}>Restaurant Name</Title>
-              </View>
-
-              <View style = {styles.cardparagraphview}>
-                <Paragraph>Restaurant Address{"\n"}</Paragraph>
-              </View>
-
-              <View style = {styles.cardbottomview}>
-                <Text >delivery time</Text>
-                <Text>minimum delivery</Text>
-              </View>
-
-            </Card.Content>
-         </Card>
+        <ScrollView>
+        {this.state.rest.map((rest) => {
+              return ( 
+              <Card style = {styles.card} theme = {defaulttheme}>
+                <Card.Content>
+                  <View style = {styles.cardtitleview}>
+                  <Title style = {styles.cardtitle}>{rest.name}</Title>
+                  </View>
+    
+                  <View style = {styles.cardparagraphview}>
+                    <Paragraph>{rest.address}{"\n"}</Paragraph>
+                  </View>
+    
+                  <View style = {styles.cardbottomview}>
+                    <Text>Delivery Time: {rest.deliverytime}</Text>
+                    <Text>Phone: {rest.phone}</Text>
+                  </View>
+    
+                </Card.Content>
+             </Card>);
+          })}
+        </ScrollView>
+        
         </PaperProvider>
       );
     }
 
 
   }
-
-
 
   const defaulttheme = {
     roundness: 2,
