@@ -4,20 +4,126 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
+import {AsyncStorage} from 'react-native';
+
+
+
 
 
 export default class Dashboard extends Component {
 
+  state = { 
+    token:"",
+    lat: "",
+    lon :"",
+    rest: [],
+    cust: ""
+  
+  }
+
+
   static navigationOptions = {
     header: null
   }
+
+
+
+
+
+  componentWillMount () {
+    
+   this._loadInitialState()
+   navigator.geolocation.getCurrentPosition(this._sucesslocation,(error) => alert(JSON.stringify(error)))
+
+  }
+
+  _sucesslocation= (position) =>{
+
+    
+
+     global.lat= parseFloat(position.coords.latitude);
+     global.lon= parseFloat(position.coords.longitude)
+
+  
+
+   this.renderPage();
+
+
+  }
+
+  _loadInitialState = async () => {
+
+
+    try {
+        var value = await AsyncStorage.getItem('token')
+        if (value != null) {
+            global.token=value;
+        }
+        this.renderPage();
+    } catch (error) {
+        console.log("error");
+    }
+
+  }
+
+  loadrestaurants(){
+
+    let data = {
+      method: 'POST',
+      credentials: 'same-origin',
+      mode: 'same-origin',
+      body: JSON.stringify({
+        lat: global.lat,
+        lon: global.lon,
+        token: global.token
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }
+
+
+    fetch('http://food.application.pk/retrieve',data).then(res => res.json()).then(
+      (result) => {
+
+        console.log(result['rest'][0])
+
+      })
+
+
+    }
+  
+
+
+    renderPage(){
+      
+      if(global.lat && global.token){
+        
+        this.loadrestaurants();
+        
+        this.setState({
+          rest:null
+        })
+      }
+    
+
+    }
+  
+  
     render() {
+
+      if(!global.lat || !global.token){
+        return null;
+      }
+      
+     
+    
+
       return (
         <PaperProvider>
           <Appbar.Header theme = {defaulttheme}>
-            <Appbar.Content
-              
-            />
+            <Appbar.Content/>
             <Appbar.Action icon="search" onPress={this._onSearch} />
             <Appbar.Action icon="more-vert" onPress={this._onMore} />
           </Appbar.Header>
@@ -26,7 +132,7 @@ export default class Dashboard extends Component {
            
             <Card.Content>
               <View style = {styles.cardtitleview}>
-                <Title style = {styles.cardtitle}>Restaurant Name</Title>
+              <Title style = {styles.cardtitle}>Restaurant Name</Title>
               </View>
 
               <View style = {styles.cardparagraphview}>
@@ -43,7 +149,11 @@ export default class Dashboard extends Component {
         </PaperProvider>
       );
     }
+
+
   }
+
+
 
   const defaulttheme = {
     roundness: 2,

@@ -15,6 +15,8 @@ import SplashScreen from './app/components/SplashScreen';
 
 
 const AppStack = createStackNavigator({
+
+    
     login: Login,  
     register: Register
 }, 
