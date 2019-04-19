@@ -85,6 +85,15 @@ export default class Dashboard extends Component {
         this.loadrestaurants();
       }
     }
+
+
+    openpage(id){
+
+
+      this.props.navigation.navigate('Menu', { id: id })
+
+
+    }
   
   
     render() {
@@ -93,7 +102,6 @@ export default class Dashboard extends Component {
         return null;
       }
       
-      console.log(this.state.rest)
 
       return (
         <PaperProvider>
@@ -106,7 +114,7 @@ export default class Dashboard extends Component {
         <ScrollView>
         {this.state.rest.map((rest) => {
               return ( 
-              <Card style = {styles.card} theme = {defaulttheme}>
+              <Card onPress={_ => this.openpage(rest.id)} style = {styles.card} theme = {defaulttheme}>
                 <Card.Content>
                   <View style = {styles.cardtitleview}>
                   <Title style = {styles.cardtitle}>{rest.name}</Title>

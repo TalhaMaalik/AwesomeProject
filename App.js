@@ -12,6 +12,7 @@ import Login from './app/components/Login';
 import Register from './app/components/Register';
 import Dashboard from './app/components/Dashboard';
 import SplashScreen from './app/components/SplashScreen';
+import Menu from './app/components/Menu'
 
 
 const AppStack = createStackNavigator({
@@ -33,6 +34,7 @@ const Appstack2 = createSwitchNavigator(
     Splash: SplashScreen,
     dashboard: Dashboard,
     App: AppStack,
+    Menu: Menu
   },
   {
     initialRouteName: 'dashboard',
