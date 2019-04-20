@@ -3,7 +3,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
-import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import {AsyncStorage} from 'react-native';
 
 
@@ -98,8 +97,9 @@ export default class Dashboard extends Component {
       return (
         <PaperProvider>
           <Appbar.Header theme = {defaulttheme}>
-            <Appbar.Content/>
-            <Appbar.Action icon="search" onPress={this._onSearch} />
+            <Appbar.Content 
+              title="Restaurants Near You"
+            />
             <Appbar.Action icon="more-vert" onPress={this._onMore} />
           </Appbar.Header>
 
@@ -168,4 +168,7 @@ export default class Dashboard extends Component {
       fontFamily: 'Montserrat-Light'
     }
   });
+
+  
+
   

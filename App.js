@@ -13,32 +13,57 @@ import Register from './app/components/Register';
 import Dashboard from './app/components/Dashboard';
 import SplashScreen from './app/components/SplashScreen';
 
+export {
+  App
+}
+class App extends Component {
 
-const AppStack = createStackNavigator({
+  render() {
+    return (
+      <Appstack/>
+    );
+  }
+}
 
-    
+
+
+const StackNavigator = createStackNavigator({
     login: Login,  
-    register: Register
+    register: Register,
 }, 
 {
   defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#ff2e44',
-    },
+    header: null
   }, 
-});  
+}); 
 
-const Appstack2 = createSwitchNavigator(
+const Stackwithdrawer = createStackNavigator({
+  dashboard: Dashboard
+}, 
+{
+defaultNavigationOptions: {
+  header: null
+}, 
+});
+
+const DrawerNavigator = createDrawerNavigator(
   {
-    Splash: SplashScreen,
-    dashboard: Dashboard,
-    App: AppStack,
-  },
-  {
-    initialRouteName: 'dashboard',
+    dashboard: Stackwithdrawer
   }
 );
 
-export default appContainer =  createAppContainer(Appstack2)
+const SwitchNavigator = createSwitchNavigator(
+  {
+    Splash: SplashScreen,
+    stack: StackNavigator,
+    drawer: DrawerNavigator
+    
+  },
+  {
+    initialRouteName: 'Splash',
+  }
+); 
+
+export default appContainer =  createAppContainer(SwitchNavigator)
 
 

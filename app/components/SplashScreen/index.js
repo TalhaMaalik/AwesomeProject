@@ -5,9 +5,9 @@ import { View, Text } from 'react-native';
 
  export default class SplashScreen extends React.Component {
 
-    static navigationOptions = {
-        header: null
-    }
+  static navigationOptions = {
+    header: null
+  }
 
     performTimeConsumingTask = async() => {
         return new Promise((resolve) =>

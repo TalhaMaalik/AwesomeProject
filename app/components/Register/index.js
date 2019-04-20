@@ -6,10 +6,11 @@ import {StyleSheet, Text, View, TextInput,Alert, TouchableOpacity } from 'react-
 
 export default class Register extends Component {
 
+  static navigationOptions = {
+    header: null
+  }
+
     state = { name:"" , address:"" , email:"" , password:"" , phone:"" }
-    static navigationOptions = {
-        header: null
-    }
 
     checkRegisteration() {
         const { name, address, email, password, phone } = this.state
