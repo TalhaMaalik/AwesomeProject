@@ -13,8 +13,7 @@ export default class Dashboard extends Component {
     lat: "",
     lon :"",
     rest: [],
-    cust: ""
-  
+    cust: "",
   }
 
   static navigationOptions = {
@@ -87,11 +86,7 @@ export default class Dashboard extends Component {
 
 
     openpage(id){
-
-
-      this.props.navigation.navigate('Menu', { id: id })
-
-
+      this.props.navigation.navigate('menu', { id: id })
     }
   
   
@@ -100,8 +95,6 @@ export default class Dashboard extends Component {
       if(!global.lat || !global.token) {
         return null;
       }
-      
-
       return (
         <PaperProvider>
           <Appbar.Header theme = {defaulttheme}>
@@ -114,22 +107,24 @@ export default class Dashboard extends Component {
         <ScrollView>
         {this.state.rest.map((rest) => {
               return ( 
-              <Card onPress={_ => this.openpage(rest.id)} style = {styles.card} theme = {defaulttheme}>
-                <Card.Content>
+              <Card onPress={_ => this.openpage(rest.id)}  theme = {defaulttheme}>
+
+                <Card.Content style = {styles.card}>
                   <View style = {styles.cardtitleview}>
                   <Title style = {styles.cardtitle}>{rest.name}</Title>
                   </View>
     
                   <View style = {styles.cardparagraphview}>
-                    <Paragraph>{rest.address}{"\n"}</Paragraph>
+                    <Paragraph style = {styles.text}>{rest.address}</Paragraph>
                   </View>
     
                   <View style = {styles.cardbottomview}>
-                    <Text>Delivery Time: {rest.deliverytime}</Text>
-                    <Text>Phone: {rest.phone}</Text>
+                    <Text style = {styles.text}>Delivery Time: {rest.deliverytime}</Text>
+                    <Text style = {styles.text}>Phone: {rest.phone}</Text>
                   </View>
     
                 </Card.Content>
+
              </Card>);
           })}
         </ScrollView>
@@ -137,14 +132,13 @@ export default class Dashboard extends Component {
         </PaperProvider>
       );
     }
-
-
   }
 
   const defaulttheme = {
     roundness: 2,
     colors: {
       primary: '#ff2e44',
+      text: 'white'
     }
   };
 
@@ -153,7 +147,9 @@ export default class Dashboard extends Component {
       padding: 20,
       marginTop: 10,
       marginRight: 10,
-      marginLeft: 10
+      marginLeft: 10,
+      backgroundColor: '#FF6347',
+      borderRadius: 10
     },
 
     cardtitleview: {
@@ -165,7 +161,7 @@ export default class Dashboard extends Component {
     },
 
     cardbottomview: {
-      marginTop: 10,
+      marginTop: 20,
       justifyContent: 'space-between',
       flexDirection: 'row'
     },
@@ -174,6 +170,10 @@ export default class Dashboard extends Component {
       alignSelf: 'center',
       fontSize: 25,
       fontFamily: 'Montserrat-Light'
+    },
+
+    text: {
+      color: 'white'
     }
   });
 

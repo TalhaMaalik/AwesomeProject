@@ -26,11 +26,10 @@ class App extends Component {
   }
 }
 
-
-
 const StackNavigator = createStackNavigator({
     login: Login,  
-    register: Register,
+    register: Register
+    
 }, 
 {
   defaultNavigationOptions: {
@@ -39,7 +38,8 @@ const StackNavigator = createStackNavigator({
 }); 
 
 const Stackwithdrawer = createStackNavigator({
-  dashboard: Dashboard
+  dashboard: Dashboard,
+  menu: Menu
 }, 
 {
 defaultNavigationOptions: {

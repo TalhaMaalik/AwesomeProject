@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
-import { DataTable } from 'react-native-paper';
+import { DataTable, Provider as PaperProvider, Appbar, Title, Button } from 'react-native-paper';
 
 
 
@@ -15,8 +15,6 @@ export default class Menu extends Component {
       menu:""
     
     }
-
-
   }
 
   componentWillMount(){
@@ -56,9 +54,6 @@ export default class Menu extends Component {
         })
 
       })
-
-
-
   }
 
   render() {
@@ -67,41 +62,82 @@ export default class Menu extends Component {
       return null
     }
 
-    
-    
     return (
-      <ScrollView>
+
+      <PaperProvider>
+          <Appbar.Header theme = {defaulttheme}>
+            <Appbar.Content 
+              title="Menu"
+            />
+            <Appbar.Action icon="more-vert" onPress={this._onMore} />
+          </Appbar.Header>
+
+      
       {this.state.menu.map((menu) => {
             return ( 
-              <DataTable>
+              <DataTable style={styles.table} >
 
-              <DataTable.Header style={styles.head}>
+              <DataTable.Header>
                 <DataTable.Title>Name</DataTable.Title>
                 <DataTable.Title numeric>-</DataTable.Title>
                 <DataTable.Title numeric>Price</DataTable.Title>
               </DataTable.Header>                
           
-              <DataTable.Row>
+              
+              <DataTable.Row >
                 <DataTable.Cell>{menu.name}</DataTable.Cell>
                 <DataTable.Cell numeric>-</DataTable.Cell>
                 <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
+
+              <DataTable.Pagination
+                page={1}
+                numberOfPages={5}
+                onPageChange={(page) => { console.log(page); }}
+                label="1-2 of 6"
+              />
       
-             
             </DataTable>
             )
         })}
-      </ScrollView>
+
+       <View style = {styles.buttonView}>
+       <Button style= {styles.button} mode="contained" onPress={() => console.log('Pressed')}>
+          ORDER NOW
+        </Button>
+       </View>
+        
+      
+      </PaperProvider>
     );
   }
 }
 
+
+const defaulttheme = {
+  roundness: 2,
+  colors: {
+    primary: '#ff2e44',
+    text: 'white'
+  }
+};
+
 const styles = StyleSheet.create({
 
-  head:{
-    
 
+  buttonView: {
+    
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  button: {
+      height: 50,
+      width: 250,
+      marginTop: 10,
+      backgroundColor: '#FF6347',
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center'
   }
-  
- 
 });
