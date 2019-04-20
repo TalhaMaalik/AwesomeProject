@@ -22,6 +22,7 @@ export default class Dashboard extends Component {
 
   componentWillMount () {
     
+    
    this._loadInitialState()
    navigator.geolocation.getCurrentPosition(this._sucesslocation,(error) => alert(JSON.stringify(error)))
 
@@ -29,8 +30,12 @@ export default class Dashboard extends Component {
 
   _sucesslocation= (position) =>{
 
+
+
      global.lat= parseFloat(position.coords.latitude);
      global.lon= parseFloat(position.coords.longitude)
+
+  
      this.renderPage();
 
   }
@@ -101,7 +106,7 @@ export default class Dashboard extends Component {
             <Appbar.Content 
               title="Restaurants Near You"
             />
-            <Appbar.Action icon="more-vert" onPress={this._onMore} />
+           
           </Appbar.Header>
 
         <ScrollView>
