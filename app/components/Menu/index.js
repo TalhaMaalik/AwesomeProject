@@ -78,9 +78,9 @@ export default class Menu extends Component {
               <DataTable style={styles.table} >
 
               <DataTable.Header>
-                <DataTable.Title>Name</DataTable.Title>
+                <DataTable.Title><Text style = {styles.text} >Name</Text></DataTable.Title>
                 <DataTable.Title numeric>-</DataTable.Title>
-                <DataTable.Title numeric>Price</DataTable.Title>
+                <DataTable.Title numeric><Text style = {styles.text} >Price</Text></DataTable.Title>
               </DataTable.Header>                
           
               
@@ -139,5 +139,9 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center'
+  },
+
+  text: {
+    fontSize: 15
   }
 });
