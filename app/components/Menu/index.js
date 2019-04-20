@@ -72,16 +72,22 @@ export default class Menu extends Component {
             <Appbar.Action icon="more-vert" onPress={this._onMore} />
           </Appbar.Header>
 
-      
+          <View style={styles.tables}>
+
+          <DataTable  >
+
+            <DataTable.Header>
+              <DataTable.Title><Text style = {styles.text} >Name</Text></DataTable.Title>
+              <DataTable.Title numeric>-</DataTable.Title>
+              <DataTable.Title numeric><Text style = {styles.text} >Price</Text></DataTable.Title>
+            </DataTable.Header> 
+          <ScrollView>
+
+
+          
       {this.state.menu.map((menu) => {
             return ( 
-              <DataTable style={styles.table} >
-
-              <DataTable.Header>
-                <DataTable.Title><Text style = {styles.text} >Name</Text></DataTable.Title>
-                <DataTable.Title numeric>-</DataTable.Title>
-                <DataTable.Title numeric><Text style = {styles.text} >Price</Text></DataTable.Title>
-              </DataTable.Header>                
+                            
           
               
               <DataTable.Row >
@@ -89,17 +95,16 @@ export default class Menu extends Component {
                 <DataTable.Cell numeric>-</DataTable.Cell>
                 <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
-
-              <DataTable.Pagination
-                page={1}
-                numberOfPages={5}
-                onPageChange={(page) => { console.log(page); }}
-                label="1-2 of 6"
-              />
       
-            </DataTable>
+           
             )
         })}
+
+      
+
+        </ScrollView>
+        </DataTable>
+        </View>
 
        <View style = {styles.buttonView}>
        <Button style= {styles.button} mode="contained" onPress={() => console.log('Pressed')}>
@@ -127,8 +132,10 @@ const styles = StyleSheet.create({
 
   buttonView: {
     
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
+    marginBottom: 10,
     alignItems: 'center',
+    flex:1
   },
 
   button: {
@@ -142,6 +149,12 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 15
+    fontSize: 15,
+    
+  },
+
+  tables : {
+    flex:4
+
   }
 });
