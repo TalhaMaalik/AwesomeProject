@@ -87,20 +87,13 @@ export default class Menu extends Component {
           
       {this.state.menu.map((menu) => {
             return ( 
-                            
-          
-              
               <DataTable.Row >
                 <DataTable.Cell>{menu.name}</DataTable.Cell>
                 <DataTable.Cell numeric>-</DataTable.Cell>
                 <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
-      
-           
             )
         })}
-
-      
 
         </ScrollView>
         </DataTable>
