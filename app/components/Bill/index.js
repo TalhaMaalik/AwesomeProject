@@ -2,9 +2,6 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity,Alert } from 'react-native';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import { DataTable, Provider as PaperProvider, Appbar, Title, Button,Divider } from 'react-native-paper';
-import { isEmptyStatement } from '@babel/types';
-
-
 
 
 
@@ -86,9 +83,36 @@ export default class Bill extends Component {
     }else{
 
 
-        console.log(global.arr)
-        console.log(global.token)
-        console.log(this.state.total)
+      let data = {
+        method: 'POST',
+        credentials: 'same-origin',
+        mode: 'same-origin',
+        body: JSON.stringify({
+          obj: global.arr,
+          token: global.token,
+          total: this.state.total
+
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+
+      fetch('http://food.application.pk/receiveorder',data).then(res => res.json()).then(
+        (result) => {
+
+          if(result.error){
+          
+            Alert.alert('Error', result.error, [{text: 'Okay'}])
+            }
+
+            else{
+
+              Alert.alert('Success', "Success", [{text: 'Okay'}])     
+                 
+            }
+        })
 
 
     }
