@@ -13,6 +13,7 @@ import Register from './app/components/Register';
 import Dashboard from './app/components/Dashboard';
 import SplashScreen from './app/components/SplashScreen';
 import Menu from './app/components/Menu'
+import Bill from './app/components/Bill'
 
 export {
   App
@@ -39,7 +40,8 @@ const StackNavigator = createStackNavigator({
 
 const Stackwithdrawer = createStackNavigator({
   dashboard: Dashboard,
-  menu: Menu
+  menu: Menu,
+  Bill: Bill
 }, 
 {
 defaultNavigationOptions: {

@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity } from 'react-native';
+import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity,ToastAndroid } from 'react-native';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
-import { DataTable, Provider as PaperProvider, Appbar, Title, Button } from 'react-native-paper';
+import { DataTable, Provider as PaperProvider, Appbar, Title, Button} from 'react-native-paper';
+
+
 
 
 
@@ -12,13 +14,15 @@ export default class Menu extends Component {
     super()
 
     state = { 
-      menu:""
+      menu:"",
+      order: "",
     
     }
   }
 
   componentWillMount(){
 
+    
     global.load=false
     this.loadmenu()
 
@@ -40,7 +44,7 @@ export default class Menu extends Component {
         'Content-Type': 'application/json'
       }
     }
-
+    global.fullorder=[]
 
     fetch('http://food.application.pk/retrievemenu',data).then(res => res.json()).then(
       (result) => {
@@ -49,11 +53,41 @@ export default class Menu extends Component {
 
         this.setState({
 
-          menu: result
+          menu: result,
+          order: 0
 
         })
 
       })
+  }
+
+
+  renderElement () {
+    if(this.state.order == 0){
+        return   <View style = {styles.buttonView}><Button style= {styles.button} disabled mode="contained" >Add item</Button></View>;
+    }
+    else{
+        return   <View style = {styles.buttonView}><Button style= {styles.button}mode="contained" onPress={() => this.Billing()}>Proceed to Checkout</Button></View>;
+    }
+}
+
+
+  OrderMenu(x){
+
+
+    this.setState(prevState => ({ order: prevState.order + 1 }));
+
+    global.fullorder.push(x)
+
+    ToastAndroid.show('Item Added!', ToastAndroid.SHORT);
+
+
+  }
+
+  Billing(){
+
+    this.props.navigation.navigate('Bill', { Order: global.fullorder})
+
   }
 
   render() {
@@ -69,7 +103,7 @@ export default class Menu extends Component {
             <Appbar.Content 
               title="Menu"
             />
-            <Appbar.Action icon="more-vert" onPress={this._onMore} />
+            
           </Appbar.Header>
 
           <View style={styles.tables}>
@@ -87,8 +121,9 @@ export default class Menu extends Component {
           
       {this.state.menu.map((menu) => {
             return ( 
-              <DataTable.Row >
-                <DataTable.Cell>{menu.name}</DataTable.Cell>
+              <DataTable.Row onPress={() =>this.OrderMenu(menu)}>
+                
+                <DataTable.Cell >{menu.name}</DataTable.Cell>
                 <DataTable.Cell numeric>-</DataTable.Cell>
                 <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
@@ -99,11 +134,8 @@ export default class Menu extends Component {
         </DataTable>
         </View>
 
-       <View style = {styles.buttonView}>
-       <Button style= {styles.button} mode="contained" onPress={() => console.log('Pressed')}>
-          ORDER NOW
-        </Button>
-       </View>
+        
+       {this.renderElement()}
         
       
       </PaperProvider>
