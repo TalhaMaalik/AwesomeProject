@@ -74,6 +74,7 @@ export default class Bill extends Component {
       
   }
 
+  
   place(){
 
     if(global.arr.length==0){
@@ -109,22 +110,17 @@ export default class Bill extends Component {
 
             else{
 
-              Alert.alert('Success', "Success", [{text: 'Okay'}])     
-                 
+              Alert.alert('Success', "Order placed successfully", [{text: 'Okay' ,  onPress: () => {
+                this.props.navigation.navigate('dashboard')
+            }}])     
+
             }
         })
-
-
+        
     }
-
   }
 
-
   render() {
-
-
-
-
     return (
 
         <PaperProvider>

@@ -4,28 +4,20 @@ import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import { DataTable, Provider as PaperProvider, Appbar, Title, Button} from 'react-native-paper';
 
 
-
-
-
 export default class Menu extends Component {
 
   constructor(){
-
     super()
-
     state = { 
       menu:"",
       order: "",
-    
     }
   }
 
   componentWillMount(){
 
-    
     global.load=false
     this.loadmenu()
-
   }
 
 
@@ -117,8 +109,6 @@ export default class Menu extends Component {
             </DataTable.Header> 
           <ScrollView>
 
-
-          
       {this.state.menu.map((menu) => {
             return ( 
               <DataTable.Row onPress={() =>this.OrderMenu(menu)}>

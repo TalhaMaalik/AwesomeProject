@@ -14,6 +14,8 @@ import Dashboard from './app/components/Dashboard';
 import SplashScreen from './app/components/SplashScreen';
 import Menu from './app/components/Menu'
 import Bill from './app/components/Bill'
+import Sidebar from './app/components/Sidebar'
+import MyOrders from './app/components/MyOrders'
 
 export {
   App
@@ -41,7 +43,8 @@ const StackNavigator = createStackNavigator({
 const Stackwithdrawer = createStackNavigator({
   dashboard: Dashboard,
   menu: Menu,
-  Bill: Bill
+  Bill: Bill,
+  myorders : MyOrders
 }, 
 {
 defaultNavigationOptions: {
@@ -52,6 +55,8 @@ defaultNavigationOptions: {
 const DrawerNavigator = createDrawerNavigator(
   {
     dashboard: Stackwithdrawer
+  } , {
+    contentComponent: Sidebar
   }
 );
 
@@ -63,7 +68,7 @@ const SwitchNavigator = createSwitchNavigator(
     
   },
   {
-    initialRouteName: 'drawer',
+    initialRouteName: 'Splash',
   }
 ); 
 

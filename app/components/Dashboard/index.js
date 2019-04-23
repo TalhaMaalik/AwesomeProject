@@ -29,13 +29,9 @@ export default class Dashboard extends Component {
   }
 
   _sucesslocation= (position) =>{
-
-
-
      global.lat= parseFloat(position.coords.latitude);
      global.lon= parseFloat(position.coords.longitude)
 
-  
      this.renderPage();
 
   }
@@ -79,9 +75,14 @@ export default class Dashboard extends Component {
           rest: result['rest'],
           cust: result['user']
         })
+        global.cust_name = this.state.cust[0].name
+        global.email = this.state.cust[0].email
       })
+      
+      
+      
     }
-  
+    
     renderPage(){
       
       if(global.lat && global.token){
@@ -124,7 +125,7 @@ export default class Dashboard extends Component {
                   </View>
     
                   <View style = {styles.cardbottomview}>
-                    <Text style = {styles.text}>Delivery Time: {rest.deliverytime}</Text>
+                    <Text style = {styles.text}>Delivery Time: {rest.deliverytime} Min</Text>
                     <Text style = {styles.text}>Phone: {rest.phone}</Text>
                   </View>
     
