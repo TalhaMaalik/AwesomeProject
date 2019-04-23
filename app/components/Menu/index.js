@@ -109,13 +109,13 @@ export default class Menu extends Component {
             </DataTable.Header> 
           <ScrollView>
 
-      {this.state.menu.map((menu) => {
+      {this.state.menu.map((menu,i) => {
             return ( 
-              <DataTable.Row onPress={() =>this.OrderMenu(menu)}>
+              <DataTable.Row key={i+menu.id} onPress={() =>this.OrderMenu(menu)}>
                 
-                <DataTable.Cell >{menu.name}</DataTable.Cell>
-                <DataTable.Cell numeric>-</DataTable.Cell>
-                <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+1}>{menu.name}</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+2} numeric>-</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+3}numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
             )
         })}

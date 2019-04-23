@@ -9,6 +9,29 @@ export default class Login extends Component {
     static navigationOptions = {
         header: null
     }
+
+
+    componentWillMount(){
+
+      this._loadInitialState()
+
+    }
+
+    _loadInitialState = async () => {
+
+      try {
+          var value = await AsyncStorage.getItem('token')
+
+          if (value != null) {
+            this.props.navigation.navigate('dashboard')
+            ToastAndroid.show('Logging in', ToastAndroid.SHORT);
+          }
+          
+      } catch (error) {
+          console.log("error");
+      }
+  
+    }
     
     checkLogin() {
 

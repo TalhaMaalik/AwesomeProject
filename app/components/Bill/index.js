@@ -144,11 +144,11 @@ export default class Bill extends Component {
 
           {global.arr.map((menu,i) => {
             return ( 
-              <DataTable.Row onPress={() => this.removeitem(i)} >
+              <DataTable.Row key={i+menu.id} onPress={() => this.removeitem(i)} >
                 
-                <DataTable.Cell >{menu.name}</DataTable.Cell>
-                <DataTable.Cell numeric>-</DataTable.Cell>
-                <DataTable.Cell numeric>{menu.price}</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+1}>{menu.name}</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+2}numeric>-</DataTable.Cell>
+                <DataTable.Cell key={i+menu.id+3} numeric>{menu.price}</DataTable.Cell>
               </DataTable.Row>
     
             )

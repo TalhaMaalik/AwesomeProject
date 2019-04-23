@@ -111,22 +111,23 @@ export default class Dashboard extends Component {
           </Appbar.Header>
 
         <ScrollView>
-        {this.state.rest.map((rest) => {
+        {this.state.rest.map((rest,i) => {
               return ( 
-              <Card onPress={_ => this.openpage(rest.id)}  theme = {defaulttheme}>
+              <Card key={i+rest.id+5} onPress={_ => this.openpage(rest.id)}  theme = {defaulttheme}>
 
-                <Card.Content style = {styles.card}>
-                  <View style = {styles.cardtitleview}>
-                  <Title style = {styles.cardtitle}>{rest.name}</Title>
+                <Card.Content key={i+rest.id+6} style = {styles.card}>
+                  <View key={i+rest.id+7} style = {styles.cardtitleview}>
+                  <Title style = {styles.cardtitle} key={i+rest.id}> {rest.name}</Title>
                   </View>
     
-                  <View style = {styles.cardparagraphview}>
-                    <Paragraph style = {styles.text}>{rest.address}</Paragraph>
+                  <View key={i+rest.id+8} style = {styles.cardbottomview}>
+                    <Text style = {styles.text} key={i+rest.id+1}>{rest.address}</Text>
+                    <Text style = {styles.text} key={i+rest.id+2}>Rating ★: {rest.rating}</Text>
                   </View>
     
-                  <View style = {styles.cardbottomview}>
-                    <Text style = {styles.text}>Delivery Time: {rest.deliverytime} Min</Text>
-                    <Text style = {styles.text}>Phone: {rest.phone}</Text>
+                  <View key={i+rest.id+9} style = {styles.cardbottomview}>
+                    <Text style = {styles.text} key={i+rest.id+3}>Delivery Time: {rest.deliverytime} Min</Text>
+                    <Text style = {styles.text} key={i+rest.id+4}>Phone: {rest.phone}</Text>
                   </View>
     
                 </Card.Content>

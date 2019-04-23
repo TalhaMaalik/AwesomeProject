@@ -5,6 +5,19 @@ import { Provider as PaperProvider, List, Menu, Divider,Button} from 'react-nati
 
 export default class Sidebar extends Component {
 
+
+
+  deletetoken = async () => {
+
+    try {
+           await AsyncStorage.removeItem('token');
+        
+    } catch (error) {
+        console.log("error");
+    }
+
+  }
+
     logout(){
 
         Alert.alert(
@@ -16,7 +29,9 @@ export default class Sidebar extends Component {
                 style: 'cancel',
               },
               {text: 'OK', onPress: () => {
-                  
+
+
+                this.deletetoken()
                 this.props.navigation.navigate('login')
             
             }},
