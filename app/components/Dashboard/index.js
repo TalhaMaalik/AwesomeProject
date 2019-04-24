@@ -22,7 +22,6 @@ export default class Dashboard extends Component {
 
   componentWillMount () {
     
-    
    this._loadInitialState()
    navigator.geolocation.getCurrentPosition(this._sucesslocation,(error) => alert(JSON.stringify(error)))
 
@@ -75,12 +74,10 @@ export default class Dashboard extends Component {
           rest: result['rest'],
           cust: result['user']
         })
+        console.log('cust',result)
         global.cust_name = this.state.cust[0].name
         global.email = this.state.cust[0].email
-      })
-      
-      
-      
+      }) 
     }
     
     renderPage(){

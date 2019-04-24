@@ -3,10 +3,6 @@ import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, Touchable
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import { DataTable, Provider as PaperProvider, Appbar, Title, Button,Divider } from 'react-native-paper';
 
-
-
-
-
 export default class Bill extends Component {
 
   constructor(){
@@ -23,9 +19,6 @@ export default class Bill extends Component {
   }
 
   componentWillMount(){
-
-
-   
     this.calculateOrder()
 
   }
@@ -145,7 +138,6 @@ export default class Bill extends Component {
           {global.arr.map((menu,i) => {
             return ( 
               <DataTable.Row key={i+menu.id} onPress={() => this.removeitem(i)} >
-                
                 <DataTable.Cell key={i+menu.id+1}>{menu.name}</DataTable.Cell>
                 <DataTable.Cell key={i+menu.id+2}numeric>-</DataTable.Cell>
                 <DataTable.Cell key={i+menu.id+3} numeric>{menu.price}</DataTable.Cell>

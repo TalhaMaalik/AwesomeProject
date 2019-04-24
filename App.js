@@ -16,6 +16,7 @@ import Menu from './app/components/Menu'
 import Bill from './app/components/Bill'
 import Sidebar from './app/components/Sidebar'
 import MyOrders from './app/components/MyOrders'
+import RecentOrders from './app/components/RecentOrders'
 
 export {
   App
@@ -44,7 +45,8 @@ const Stackwithdrawer = createStackNavigator({
   dashboard: Dashboard,
   menu: Menu,
   Bill: Bill,
-  myorders : MyOrders
+  myorders : MyOrders,
+  recentorders: RecentOrders
 }, 
 {
 defaultNavigationOptions: {

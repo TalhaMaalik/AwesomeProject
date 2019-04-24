@@ -126,8 +126,6 @@ export default class Menu extends Component {
 
         
        {this.renderElement()}
-        
-      
       </PaperProvider>
     );
   }
