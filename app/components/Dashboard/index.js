@@ -3,7 +3,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,ToastAndroid,YellowBox} from 'react-native';
 
 
 export default class Dashboard extends Component {
@@ -77,7 +77,11 @@ export default class Dashboard extends Component {
         console.log('cust',result)
         global.cust_name = this.state.cust[0].name
         global.email = this.state.cust[0].email
-      }) 
+
+      }).catch(function() {
+          ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+          
+        });
     }
     
     renderPage(){
@@ -94,7 +98,7 @@ export default class Dashboard extends Component {
   
   
     render() {
-
+     
       if(!global.lat || !global.token) {
         return null;
       }

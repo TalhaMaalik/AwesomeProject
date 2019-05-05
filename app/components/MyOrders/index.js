@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, View, ScrollView, ToastAndroid } from 'react-native';
 import { Appbar , Provider as PaperProvider , Card, Paragraph, Title, Button, Avatar} from 'react-native-paper';
 
 
@@ -49,7 +49,10 @@ export default class MyOrders extends Component {
               orderInfo: result,
             })
 
-          })
+          }).catch(function() {
+            ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+            
+          });
       }
 
       openpage(x,y){

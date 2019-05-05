@@ -1,7 +1,7 @@
 
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, TextInput,Alert, TouchableOpacity } from 'react-native';
+import {StyleSheet, Text, View, TextInput,Alert, TouchableOpacity,ToastAndroid } from 'react-native';
 
 
 export default class Register extends Component {
@@ -59,7 +59,10 @@ export default class Register extends Component {
                 this.props.navigation.navigate('login')
   
               }
-            })
+            }).catch(function() {
+              ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+              
+            });
         }
     }
 

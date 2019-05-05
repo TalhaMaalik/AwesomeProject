@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity,ToastAndroid } from 'react-native';
+import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, ToastAndroid } from 'react-native';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import { DataTable, Provider as PaperProvider, Appbar, Title, Button} from 'react-native-paper';
 
@@ -50,7 +50,10 @@ export default class Menu extends Component {
 
         })
 
-      })
+      }).catch(function() {
+        ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+        
+      });
   }
 
 

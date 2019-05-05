@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, TouchableOpacity,Alert } from 'react-native';
+import {Platform, StyleSheet,ScrollView, Text, View, Image, TextInput, ToastAndroid,Alert } from 'react-native';
 import { createAppContainer , createDrawerNavigator } from 'react-navigation';
 import { DataTable, Provider as PaperProvider, Appbar, Title, Button,Divider } from 'react-native-paper';
 
@@ -108,7 +108,10 @@ export default class Bill extends Component {
             }}])     
 
             }
-        })
+        }).catch(function() {
+          ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+          
+        });
         
     }
   }

@@ -24,7 +24,7 @@ export default class Login extends Component {
 
           if (value != null) {
             this.props.navigation.navigate('dashboard')
-            ToastAndroid.show('Logging in', ToastAndroid.SHORT);
+            
           }
           
       } catch (error) {

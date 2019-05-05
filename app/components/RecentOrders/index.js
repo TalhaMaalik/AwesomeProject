@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import {StyleSheet, Text, View, ScrollView, ToastAndroid, Alert } from 'react-native';
 import { Appbar , Provider as PaperProvider , DataTable, Button, Dialog, Portal} from 'react-native-paper';
 //import Dialog from "react-native-dialog";
 import StarRating from 'react-native-star-rating';
@@ -54,7 +54,10 @@ export default class RecentOrders extends Component {
             Alert.alert('Error', "Error submitting feedback", [{text: 'Okay'}])     
 
             }
-        })
+        }).catch(function() {
+          ToastAndroid.show('no internet connection', ToastAndroid.LONG);
+          
+        });
       }
 
       onStarRatingPress(rating) {
