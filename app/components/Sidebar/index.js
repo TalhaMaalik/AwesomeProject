@@ -63,6 +63,13 @@ export default class Sidebar extends Component {
             </View>
 
             <View style = {styles.menuView}>
+
+                <List.Item 
+                    title = "Home"
+                    description="Go Back To Dashboard"
+                    onPress = {() => this.props.navigation.navigate('dashboard')}
+                    left={() => <List.Icon  color='#ff2e44' icon="home" />}
+                />
                 <List.Item 
                     title = "My Orders"
                     description="View Your Recent Orders Information"

@@ -65,15 +65,11 @@ export default class RecentOrders extends Component {
       }
 
       renderElement () {
-      /*  if(this.state.rating == 0){
-            return   <View style = {styles.buttonView}><Button style= {styles.button} disabled mode="contained" >Give Feedback</Button></View>;
-        } */
-       // else{
+     
             return  <View style = {styles.buttonView}>
                         <Button style= {styles.button}mode="contained" onPress={() => this.showDialog()}>Give Feedback</Button>
                   </View>
             
-       // } 
     }
 
    
@@ -102,11 +98,10 @@ export default class RecentOrders extends Component {
 
           {global.orderslist.map((items,i) => {
             return ( 
-              <DataTable.Row>
-                
-                <DataTable.Cell>{items.name}</DataTable.Cell>
-                <DataTable.Cell numeric>-</DataTable.Cell>
-                <DataTable.Cell numeric>{items.price}</DataTable.Cell>
+              <DataTable.Row key={i+1}>
+                <DataTable.Cell key={i+2}>{items.name}</DataTable.Cell>
+                <DataTable.Cell numeric key={i+3}>-</DataTable.Cell>
+                <DataTable.Cell numeric key={i+4}>{items.price}</DataTable.Cell>
               </DataTable.Row>
 
             )

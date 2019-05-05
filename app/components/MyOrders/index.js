@@ -78,18 +78,18 @@ export default class MyOrders extends Component {
                     
               return ( 
                 
-              <Card  onPress={_ => this.openpage(order.items,order.orderID)} theme = {defaulttheme}>
+              <Card key={i+1} onPress={_ => this.openpage(order.items,order.orderID)} theme = {defaulttheme}>
 
-                <Card.Content  style = {styles.card}>
+                <Card.Content key={i+2} style = {styles.card}>
                   
-                  <View style = {styles.cardbottomview}>
-                    <Text style = {styles.text}>{order.name}</Text>
-                    <Text style = {styles.text}>Total Amount: {order.amount}</Text>
+                  <View key={i+3} style = {styles.cardbottomview}>
+                    <Text style = {styles.text} key={i+4}>{order.name}</Text>
+                    <Text style = {styles.text} key={i+5}>Total Amount: {order.amount}</Text>
                   </View>
     
-                  <View style = {styles.cardbottomview}>
-                    <Text style = {styles.text}>Status: {order.status} </Text>
-                    <Text style = {styles.text}>{order.date}</Text>
+                  <View key={i+6} style = {styles.cardbottomview}>
+                    <Text style = {styles.text} key={i+7}>Status: {order.status} </Text>
+                    <Text style = {styles.text} key={i+8}>{order.date}</Text>
                   </View>
     
                 </Card.Content>

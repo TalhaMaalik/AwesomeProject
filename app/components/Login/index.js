@@ -1,7 +1,7 @@
 
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
-import {AsyncStorage} from 'react-native';
+import {AsyncStorage,YellowBox} from 'react-native';
 
 export default class Login extends Component {
 
@@ -71,6 +71,7 @@ export default class Login extends Component {
     }
 
     render() {
+      YellowBox.ignoreWarnings(['Warning: Async Storage has been extracted from react-native core']);
       if (this.state.isLoading) {
         return <SplashScreen />;
       }
